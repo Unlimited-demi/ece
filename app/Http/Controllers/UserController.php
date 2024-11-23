@@ -19,7 +19,7 @@ class UserController extends Controller
      /**
 *@OA\Get(
     *     path="/api/students",
-    *     summary="Get students",
+    *     summary="Get all students",
     *     description="Get all students data(paginated)",
     *     operationId="getAllStudents",
     *     tags={"Student Data"},
