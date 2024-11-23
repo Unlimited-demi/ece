@@ -76,6 +76,20 @@ class UserController extends Controller
     *         required=true,
     *         @OA\Schema(type="text")
     *     ),
+     * @OA\Parameter(
+    *         name="per_page",
+    *         in="query",
+    *         description="Items per page",
+    *         required=false,
+    *         @OA\Schema(type="integer", default=200)
+    *     ),
+     *@OA\Parameter(
+ *         name="page",
+ *         in="query",
+ *         description="Page number",
+ *         required=false,
+ *         @OA\Schema(type="integer", default=1)
+ *     ),
   * @OA\Response(
  *     response=200,
  *     description="Array of student properties",
@@ -87,11 +101,6 @@ class UserController extends Controller
  * *  @OA\Response(
      *     response=400,
      *     description="Search term is required",
-     *     @OA\JsonContent()
-     *   ),
- * *  @OA\Response(
-     *     response=404,
-     *     description="No student(s) found",
      *     @OA\JsonContent()
      *   ),
  * ),
@@ -112,16 +121,10 @@ class UserController extends Controller
             ->orWhere('middle_name', 'like', "%$query%")
             ->orWhere('last_name', 'like', "%$query%")
             ->orWhere('reg_number', 'like', "%$query%")
-            ->get();
+            ->paginate($request->query('per_page',200));
 
-        // Check if students were found
-        if ($students->isEmpty()) {
-            return $this->error(null, 'No student(s) found', 404);
-        }
-
-        return $this->success([
-            'students' => $students
-        ]);
+        $studentDetails = StudentResource::collection($students);
+        return $studentDetails;
     }
 
 }

@@ -300,7 +300,7 @@
                 ],
                 "summary": "Search for students",
                 "description": "Route for searching for students with matching first name, last name, middle name and reg number",
-                "operationId": "searchStudent",
+                "operationId": "studentSearch",
                 "parameters": [
                     {
                         "name": "query",
@@ -309,6 +309,26 @@
                         "required": true,
                         "schema": {
                             "type": "text"
+                        }
+                    },
+                    {
+                        "name": "per_page",
+                        "in": "query",
+                        "description": "Items per page",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "default": 200
+                        }
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "Page number",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "default": 1
                         }
                     }
                 ],
@@ -328,14 +348,6 @@
                     },
                     "400": {
                         "description": "Search term is required",
-                        "content": {
-                            "application/json": {
-                                "schema": {}
-                            }
-                        }
-                    },
-                    "404": {
-                        "description": "No student(s) found",
                         "content": {
                             "application/json": {
                                 "schema": {}
