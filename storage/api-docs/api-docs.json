@@ -293,6 +293,44 @@
                 ]
             }
         },
+        "/api/student/{reg_number}": {
+            "get": {
+                "tags": [
+                    "Student Data"
+                ],
+                "summary": "Get a student",
+                "description": "Get a student with their reg_number",
+                "operationId": "getAStudent",
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "object",
+                                            "example": {
+                                                "student_property": "student_value"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Student not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/api/students/search": {
             "get": {
                 "tags": [

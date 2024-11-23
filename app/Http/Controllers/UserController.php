@@ -62,6 +62,43 @@ class UserController extends Controller
         return $studentDetails;
     }
 
+    /**
+*@OA\Get(
+    *     path="/api/student/{reg_number}",
+    *     summary="Get a student",
+    *     description="Get a student with their reg_number",
+    *     operationId="getAStudent",
+    *     tags={"Student Data"},
+  *  @OA\Response(
+ *     response=200,
+ *     description="Successful response",
+ * @OA\JsonContent(
+ *             type="object",
+    *     @OA\Property(
+ *             property="data",
+ *             type="object",
+            * example={"student_property": "student_value"},
+ *         ),
+ * ),
+ * ),
+ * @OA\Response(
+     *     response=404,
+     *     description="Student not found",
+     *     @OA\JsonContent()
+     *   ),
+    * )
+    */
+    public function getAStudent($reg_number)
+    {
+        $student = Student::find($reg_number);
+        if (!$student) {
+            return $this->error(null, 'Student not found', 404);
+        }
+        
+        $studentDetails = new StudentResource($student);
+        return $studentDetails;
+    }
+
      /**
 *@OA\Get(
     *     path="/api/students/search",

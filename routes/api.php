@@ -19,6 +19,8 @@ Route::group(['middleware' => ['auth:sanctum']], function(){
     Route::group(['middleware' => ['check.role:staff']], function(){
         //get all students (paginated)
         Route::get('/students', [UserController::class, 'getAllStudents']);
+        //get a student by their reg number
+        Route::get('/student/{reg_number}', [UserController::class, 'getAStudent']);
         //search for a student with query attached to the get request
         Route::get('/students/search', [UserController::class, 'studentSearch']);
     });
