@@ -20,7 +20,8 @@ Route::group(['middleware' => ['auth:sanctum']], function(){
         //get all students (paginated)
         Route::get('/students', [UserController::class, 'getAllStudents']);
         //get a student by their reg number
-        Route::get('/student/{reg_number}', [UserController::class, 'getAStudent']);
+        Route::get('/student/{reg_number}', [UserController::class, 'getAStudent'])
+        ->where('reg_number', '.*'); // Allows any character in reg_number
         //search for a student with query attached to the get request
         Route::get('/students/search', [UserController::class, 'studentSearch']);
     });

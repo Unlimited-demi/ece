@@ -72,6 +72,13 @@ class UserController extends Controller
         *     security={
     *         {"sanctum": {}}
     *     },
+    *@OA\Parameter(
+ *         name="reg_number",
+ *         in="path",
+ *         required=true,
+ *         description="The registration number of the student",
+ *         @OA\Schema(type="string")
+ *     ),
   *  @OA\Response(
  *     response=200,
  *     description="Successful response",
@@ -117,7 +124,7 @@ class UserController extends Controller
     *         in="query",
     *         description="Search query",
     *         required=true,
-    *         @OA\Schema(type="text")
+    *         @OA\Schema(type="string")
     *     ),
      * @OA\Parameter(
     *         name="per_page",
