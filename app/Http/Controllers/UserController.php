@@ -66,7 +66,7 @@ class UserController extends Controller
 *@OA\Get(
     *     path="/api/student/{reg_number}",
     *     summary="Get a student",
-    *     description="Get a student with their reg_number",
+    *     description="Get a student with his/her reg_number",
     *     operationId="getAStudent",
     *     tags={"Student Data"},
   *  @OA\Response(
