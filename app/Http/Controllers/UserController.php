@@ -69,6 +69,9 @@ class UserController extends Controller
     *     description="Get a student with his/her reg_number",
     *     operationId="getAStudent",
     *     tags={"Student Data"},
+        *     security={
+    *         {"sanctum": {}}
+    *     },
   *  @OA\Response(
  *     response=200,
  *     description="Successful response",
@@ -106,6 +109,9 @@ class UserController extends Controller
     *     description="Route for searching for students with matching first name, last name, middle name and reg number",
     *     operationId="studentSearch",
     *     tags={"Student Data"},
+        *     security={
+    *         {"sanctum": {}}
+    *     },
     * @OA\Parameter(
     *         name="query",
     *         in="query",
