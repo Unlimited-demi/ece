@@ -48,7 +48,7 @@ class UserController extends Controller
     *     @OA\Property(
  *             property="data",
  *             type="object",
-            * example={"listing_property": "listing_value"},
+            * example={"student_property": "student_value"},
  *         ),
  * ),
  * ),
@@ -61,4 +61,67 @@ class UserController extends Controller
         $studentDetails = StudentResource::collection($students);
         return $studentDetails;
     }
+
+     /**
+*@OA\Get(
+    *     path="/api/students/search",
+    *     summary="Search for students",
+    *     description="Route for searching for students with matching first name, last name, middle name and reg number",
+    *     operationId="studentSearch",
+    *     tags={"Student Data"},
+    * @OA\Parameter(
+    *         name="query",
+    *         in="query",
+    *         description="Search query",
+    *         required=true,
+    *         @OA\Schema(type="text")
+    *     ),
+  * @OA\Response(
+ *     response=200,
+ *     description="Array of student properties",
+ * @OA\JsonContent(
+ *             type="object",
+            * example={"student_property": "student_value"},
+ *         ),
+ * ),
+ * *  @OA\Response(
+     *     response=400,
+     *     description="Search term is required",
+     *     @OA\JsonContent()
+     *   ),
+ * *  @OA\Response(
+     *     response=404,
+     *     description="No student(s) found",
+     *     @OA\JsonContent()
+     *   ),
+ * ),
+    */
+
+    public function studentSearch(Request $request)
+    {
+        // Validate the search input
+        if (!$request->filled('query')) {
+            return $this->error(null, 'Search term is required', 400);
+        }
+
+        // Get the search query from the request
+        $query = $request->input('query');
+
+        // Search for the student in the database
+        $students = Student::where('first_name', 'like', "%$query%")
+            ->orWhere('middle_name', 'like', "%$query%")
+            ->orWhere('last_name', 'like', "%$query%")
+            ->orWhere('reg_number', 'like', "%$query%")
+            ->get();
+
+        // Check if students were found
+        if ($students->isEmpty()) {
+            return $this->error(null, 'No student(s) found', 404);
+        }
+
+        return $this->success([
+            'students' => $students
+        ]);
+    }
+
 }

@@ -242,7 +242,7 @@
                     "Student Data"
                 ],
                 "summary": "Get students",
-                "description": "Get all students (paginated)",
+                "description": "Get all students data(paginated)",
                 "operationId": "getAllStudents",
                 "parameters": [
                     {
@@ -276,7 +276,7 @@
                                         "data": {
                                             "type": "object",
                                             "example": {
-                                                "listing_property": "listing_value"
+                                                "student_property": "student_value"
                                             }
                                         }
                                     },
@@ -291,6 +291,58 @@
                         "sanctum": []
                     }
                 ]
+            }
+        },
+        "/api/students/search": {
+            "get": {
+                "tags": [
+                    "Student Data"
+                ],
+                "summary": "Search for students",
+                "description": "Route for searching for students with matching first name, last name, middle name and reg number",
+                "operationId": "searchStudent",
+                "parameters": [
+                    {
+                        "name": "query",
+                        "in": "query",
+                        "description": "Search query",
+                        "required": true,
+                        "schema": {
+                            "type": "text"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Array of student properties",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                },
+                                "example": {
+                                    "student_property": "student_value"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Search term is required",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "No student(s) found",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
             }
         }
     },
