@@ -1,7 +1,7 @@
 # Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
 # More GitHub Actions for Azure: https://github.com/Azure/actions
 
-name: Build and deploy PHP app to Azure Web App - ecedb
+name: Build and deploy PHP app to Azure Web App - ece-db
 
 on:
   push:
@@ -61,15 +61,15 @@ jobs:
       - name: Login to Azure
         uses: azure/login@v2
         with:
-          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_281C586818F44D3EB26B24C6CF1799D1 }}
-          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_0E37CF32D8874BF98AA0B896A94E3C5B }}
-          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_A81BB06E5E9741CF91524E0AC6F5AF57 }}
+          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_1858C1B4FF2C4DFEB28A9DA344578DC9 }}
+          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_24D6F6CF265B4819B95A3B0AE1A1008D }}
+          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_FB791D4FB91D4ACF9A87555A2A98805E }}
 
       - name: 'Deploy to Azure Web App'
         uses: azure/webapps-deploy@v3
         id: deploy-to-webapp
         with:
-          app-name: 'ecedb'
+          app-name: 'ece-db'
           slot-name: 'Production'
           package: .
           
